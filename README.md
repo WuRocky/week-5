@@ -1,5 +1,6 @@
 # week-5
 ## 第二題內容
+### SQL語法
 ```sql
 
 create database website; -- 建立資料庫
@@ -14,3 +15,6 @@ create table member(
 ); -- 建立資料欄位
 
 ```
+### 圖片
+![01](https://user-images.githubusercontent.com/84265782/196320055-9fa55971-1a00-4151-8120-13bd64ca5cb0.png)
+![02](https://user-images.githubusercontent.com/84265782/196320104-6533d864-1619-4aa0-9f60-0b271be94970.png)
