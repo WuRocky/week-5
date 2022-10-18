@@ -12,7 +12,7 @@ create table member(
 	password varchar(255) not null,
 	follower_count int unsigned not null default 0,
 	time datetime not null DEFAULT CURRENT_TIMESTAMP
-); -- 建立資料欄位
+); -- 建立 member 資料欄位
 
 ```
 ### 圖片
@@ -76,7 +76,46 @@ select avg(follower_count) as 所有會員追蹤者的總和的平均數 from me
 #### 取得 member 資料表中，總共有幾筆資料 ( 幾位會員 )、所有會員 follower_count 欄位的總和、所有會員 follower_count 欄位的平均數。
 ![06](https://user-images.githubusercontent.com/84265782/196322809-7fdb2199-8052-470b-bff1-2059bbb1883e.png)
 
+## 第五題內容
+### SQL語法
+```sql
+create table message(
+	id bigint primary key auto_increment,
+	member_id bigint not null,
+	content varchar(255) not null,
+	like_count int unsigned not null default 0,
+	time datetime not null DEFAULT CURRENT_TIMESTAMP,
+	foreign key (member_id) references member(id)
+); -- 建立 message 資料欄位
+
+insert into message(member_id, content, like_count) values(1, "好喜歡Wehelp喔", 70); -- 新增資料
+insert into message(member_id, content, like_count) values(1, "大家加油!!!", 45); -- 新增資料
+insert into message(member_id, content, like_count) values(1, "每天都要學習!!!", 50); -- 新增資料
+insert into message(member_id, content, like_count) values(2, "加油喔", 3); -- 新增資料
+insert into message(member_id, content, like_count) values(2, "腳傷快點好~", 2); -- 新增資料
+insert into message(member_id, content, like_count) values(2, "辛苦了", 1); -- 新增資料
+insert into message(member_id, content) values(3, "哈哈"); -- 新增資料
+insert into message(member_id, content) values(3, "大家好"); -- 新增資料
+insert into message(member_id, content) values(4, "天氣好差"); -- 新增資料
+insert into message(member_id, content, like_count) values(5, "希望明天有太陽", 10); -- 新增資料
+insert into message(member_id, content, like_count) values(5, "希望明天不要下雨", 20); -- 新增資料
+
+select a.name as 會員姓名, b.content as 留言內容 
+from member as a
+inner join message as b
+on a.id = b.member_id; -- JOIN 語法，取得所有留⾔，結果須包含留⾔者會員的姓名
 
 
+select a.name as 會員姓名, b.content as 留言內容 
+from member as a
+inner join message as b
+on a.id = b.member_id
+where a.username="test"; -- JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留言，資料中須包含留⾔者會員的姓名
+
+select a.username as 帳戶名稱 ,avg(b.like_count) as 所有留言平均按讚數 from member as a
+left join message as b on a.id = b.member_id 
+where a.username="test"; -- SQL Aggregate Functions 搭配 JOIN 語法，取得 member 資料表中欄位 userna
+
+```
 
 
