@@ -61,4 +61,22 @@ update member set name="test2" where username="test"; -- 更新 username 是 tes
 #### 只取得 username 是 test 的資料、取得 username 是 test 的和 password 是 test 的資料、更新 username 是 test 的資料，將 name欄位 改成 test2
 ![05](https://user-images.githubusercontent.com/84265782/196322045-c6066b71-5722-4901-ac96-80505b13627d.png)
 
+## 第四題內容
+### SQL語法
+```sql
+select count(*) as 總共有幾筆會員資料 from member; -- 總共有幾筆資料 
+
+select sum(follower_count) as 所有會員追蹤者的總和 from member; -- follower_count 欄位的總和
+ 
+select avg(follower_count) as 所有會員追蹤者的總和的平均數 from member; --  follower_count 欄位的平均數
+
+```
+
+### 圖片
+#### 取得 member 資料表中，總共有幾筆資料 ( 幾位會員 )、所有會員 follower_count 欄位的總和、所有會員 follower_count 欄位的平均數。
+![06](https://user-images.githubusercontent.com/84265782/196322809-7fdb2199-8052-470b-bff1-2059bbb1883e.png)
+
+
+
+
 
