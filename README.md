@@ -124,5 +124,39 @@ where a.username="test"; -- SQL Aggregate Functions 搭配 JOIN 語法，取得 
 #### JOIN 語法，取得所有留⾔，結果須包含留⾔者會員的姓名、取得 member 資料表中欄位 username 是 test 的所有留⾔，資料中須包含留⾔者會員的姓名、SQL Aggregate Functions 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留⾔平均按讚數
 ![08](https://user-images.githubusercontent.com/84265782/196324219-8e6b0b97-0d18-411f-8f19-265915029641.png)
 
+## 額外內容
+### SQL語法
+```sql
+create table record_like(
+	id bigint primary key auto_increment,
+	member_id bigint not null,
+	click_message_like bigint not null UNIQUE, 
+    like_user varchar(255) not null,
+    foreign key (member_id) references member(id),
+	foreign key (click_message_like) references message(id)
+); -- 建立 record 資料欄位
 
+insert into record_like(member_id, click_message_like, like_user) values(1, 3, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(1, 8, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(2, 4, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(2, 5, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(3, 6, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(3, 7, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(4, 9, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(4, 10, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(5, 11, "+1"); -- 新增資料
+insert into record_like(member_id, click_message_like, like_user) values(5, 1, "+1"); -- 新增資料
+
+select a.name as 按讚會員,b.content as 對按讚的內容, c.like_user as 按讚 
+from  member as a inner join message as b on a.id=b.member_id 
+inner join record_like as c on b.id = c.click_message_like; -- 查詢按讚的人和內容
+```
+
+### 圖片
+#### 建立 record_like 資料欄位、新增資料
+![11](https://user-images.githubusercontent.com/84265782/196382136-4460ea37-f4d4-4366-bc3f-b0c91a1880ee.png)
+#### 查詢 record_like 資料欄位
+![09](https://user-images.githubusercontent.com/84265782/196382523-14a1f4ce-6778-4676-9ed3-f68c56868892.png)
+#### 查詢 按讚人員 和 按讚內容 
+![10](https://user-images.githubusercontent.com/84265782/196382316-0806ab0f-5b84-48cb-bf6f-c3071b71f0a5.png)
 
