@@ -2,7 +2,7 @@
 ## 第二題內容
 ```sql
 
-create database website;
+create database website; -- 建立資料庫
 
 create table member(
 	id bigint primary key auto_increment,
@@ -11,6 +11,6 @@ create table member(
 	password varchar(255) not null,
 	follower_count int unsigned not null default 0,
 	time datetime not null DEFAULT CURRENT_TIMESTAMP
-);
+); -- 建立資料欄位
 
 ```
