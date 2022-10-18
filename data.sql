@@ -79,6 +79,36 @@ LOCK TABLES `message` WRITE;
 INSERT INTO `message` VALUES (1,1,'好喜歡Wehelp喔',70,'2022-10-18 09:12:22'),(2,1,'大家加油!!!',45,'2022-10-18 09:12:28'),(3,1,'每天都要學習!!!',50,'2022-10-18 09:12:33'),(4,2,'加油喔',3,'2022-10-18 09:12:38'),(5,2,'腳傷快點好~',2,'2022-10-18 09:12:45'),(6,2,'辛苦了',1,'2022-10-18 09:12:52'),(7,3,'哈哈',0,'2022-10-18 09:13:01'),(8,3,'大家好',0,'2022-10-18 09:13:10'),(9,4,'天氣好差',0,'2022-10-18 09:13:15'),(10,5,'希望明天有太陽',10,'2022-10-18 09:13:22'),(11,5,'希望明天不要下雨',20,'2022-10-18 09:13:31');
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `record_like`
+--
+
+DROP TABLE IF EXISTS `record_like`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `record_like` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `member_id` bigint NOT NULL,
+  `click_message_like` bigint NOT NULL,
+  `like_user` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `click_message_like` (`click_message_like`),
+  KEY `member_id` (`member_id`),
+  CONSTRAINT `record_like_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`),
+  CONSTRAINT `record_like_ibfk_2` FOREIGN KEY (`click_message_like`) REFERENCES `message` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `record_like`
+--
+
+LOCK TABLES `record_like` WRITE;
+/*!40000 ALTER TABLE `record_like` DISABLE KEYS */;
+INSERT INTO `record_like` VALUES (1,1,3,'+1'),(2,1,8,'+1'),(3,2,4,'+1'),(4,2,5,'+1'),(5,3,6,'+1'),(6,3,7,'+1'),(7,4,9,'+1'),(8,4,10,'+1'),(9,5,11,'+1'),(10,5,1,'+1');
+/*!40000 ALTER TABLE `record_like` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -89,4 +119,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-18  9:30:48
+-- Dump completed on 2022-10-18 16:54:41
