@@ -118,4 +118,11 @@ where a.username="test"; -- SQL Aggregate Functions 搭配 JOIN 語法，取得 
 
 ```
 
+### 圖片
+#### 建立 message 資料欄位、新增資料
+![07](https://user-images.githubusercontent.com/84265782/196323793-8e99d21e-4fde-4bf4-b889-e4b981cc98c2.png)
+#### JOIN 語法，取得所有留⾔，結果須包含留⾔者會員的姓名、取得 member 資料表中欄位 username 是 test 的所有留⾔，資料中須包含留⾔者會員的姓名、SQL Aggregate Functions 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留⾔平均按讚數
+![08](https://user-images.githubusercontent.com/84265782/196324219-8e6b0b97-0d18-411f-8f19-265915029641.png)
+
+
 
