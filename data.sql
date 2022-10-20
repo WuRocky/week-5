@@ -88,16 +88,14 @@ DROP TABLE IF EXISTS `record_like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `record_like` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `member_id` bigint NOT NULL,
-  `click_message_like` bigint NOT NULL,
-  `like_user` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `click_message_like` (`click_message_like`),
-  KEY `member_id` (`member_id`),
-  CONSTRAINT `record_like_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`),
-  CONSTRAINT `record_like_ibfk_2` FOREIGN KEY (`click_message_like`) REFERENCES `message` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_id` bigint NOT NULL,
+  `user_like` bigint NOT NULL,
+  `click_like` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`,`user_like`),
+  KEY `user_like` (`user_like`),
+  CONSTRAINT `record_like_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `member` (`id`),
+  CONSTRAINT `record_like_ibfk_2` FOREIGN KEY (`user_like`) REFERENCES `message` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -106,7 +104,7 @@ CREATE TABLE `record_like` (
 
 LOCK TABLES `record_like` WRITE;
 /*!40000 ALTER TABLE `record_like` DISABLE KEYS */;
-INSERT INTO `record_like` VALUES (1,1,3,'+1'),(2,1,8,'+1'),(3,2,4,'+1'),(4,2,5,'+1'),(5,3,6,'+1'),(6,3,7,'+1'),(7,4,9,'+1'),(8,4,10,'+1'),(9,5,11,'+1'),(10,5,1,'+1');
+INSERT INTO `record_like` VALUES (1,1,'+1'),(1,10,'+1'),(1,11,'+1'),(2,1,'+1'),(2,8,'+1'),(2,9,'+1'),(3,2,'+1'),(3,6,'+1'),(3,7,'+1'),(4,3,'+1'),(4,4,'+1'),(4,5,'+1'),(5,2,'+1'),(5,3,'+1'),(5,4,'+1'),(5,5,'+1');
 /*!40000 ALTER TABLE `record_like` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -119,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-18 16:54:41
+-- Dump completed on 2022-10-20 11:51:18
