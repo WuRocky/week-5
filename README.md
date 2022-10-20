@@ -128,35 +128,34 @@ where a.username="test"; -- SQL Aggregate Functions 搭配 JOIN 語法，取得 
 ### SQL語法
 ```sql
 create table record_like(
-	id bigint primary key auto_increment,
-	member_id bigint not null,
-	click_message_like bigint not null UNIQUE, 
-    like_user varchar(255) not null,
-    foreign key (member_id) references member(id),
-	foreign key (click_message_like) references message(id)
-); -- 建立 record 資料欄位
+    user_id  bigint not null,
+    user_like bigint not null,
+    click_like varchar(255) not null,
+    PRIMARY KEY(user_id, user_like)
+); -- 建立 record 資料欄位，user_id 和 user_like都是主鍵
 
-insert into record_like(member_id, click_message_like, like_user) values(1, 3, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(1, 8, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(2, 4, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(2, 5, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(3, 6, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(3, 7, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(4, 9, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(4, 10, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(5, 11, "+1"); -- 新增資料
-insert into record_like(member_id, click_message_like, like_user) values(5, 1, "+1"); -- 新增資料
+-- record_like 的 user_id 和 user_like 分別是 member(id) 和 message(id) 外鍵 防止重複
+alter table record_like add foreign key (user_id) references member(id);
+alter table record_like add foreign key (user_like) references message(id);
 
-select a.name as 按讚會員,b.content as 對按讚的內容, c.like_user as 按讚 
-from  member as a inner join message as b on a.id=b.member_id 
-inner join record_like as c on b.id = c.click_message_like; -- 查詢按讚的人和內容
+insert into record_like(user_id, user_like, click_like) 
+values(1, 11, "+1"),(1, 10, "+1"),(1, 1, "+1"),(2, 9, "+1"),(2, 8, "+1")
+,(2, 1, "+1"),(3, 7, "+1"),(3, 6, "+1"),(3, 2, "+1"),(4, 5, "+1"),(4, 4, "+1")
+,(4, 3, "+1"),(5, 3, "+1"),(5, 2, "+1"),(5, 5, "+1"),(5, 4, "+1"); -- 新增資料
+
+
+select c.name 按讚的人, b.content as 按讚的內容, a.click_like as 按讚 from record_like as a 
+inner join message as b on a.user_like=b.id 
+inner join member as c on a.user_id=c.id;-- 查詢按讚的人和內容
 ```
 
 ### 圖片
-#### 建立 record_like 資料欄位、新增資料
-![11](https://user-images.githubusercontent.com/84265782/196382136-4460ea37-f4d4-4366-bc3f-b0c91a1880ee.png)
+#### 建立 record_like 資料欄位、關連到 member 和 message 主鍵外鍵、新增資料
+![10-01](https://user-images.githubusercontent.com/84265782/196852033-1ad33151-dff8-4b07-ab1c-3dc7fef73515.png)
 #### 查詢 record_like 資料欄位
-![09](https://user-images.githubusercontent.com/84265782/196382523-14a1f4ce-6778-4676-9ed3-f68c56868892.png)
+![10-02](https://user-images.githubusercontent.com/84265782/196852052-e8eccfd0-bb74-4e3d-89b8-e1bcffcb2be7.png)
+#### 如果同一個使用者重複對同一個留言按讚，會無法輸入
+![10-03](https://user-images.githubusercontent.com/84265782/196852182-00752f07-24b8-42aa-b741-d80ed38a619b.png)
 #### 查詢 按讚人員 和 按讚內容 
-![10](https://user-images.githubusercontent.com/84265782/196382316-0806ab0f-5b84-48cb-bf6f-c3071b71f0a5.png)
+![10-04](https://user-images.githubusercontent.com/84265782/196852192-592ebdec-5242-4750-898a-58e12803719d.png)
 
